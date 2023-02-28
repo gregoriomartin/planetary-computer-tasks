@@ -43,8 +43,6 @@ collections:
           options:
             name_starts_with: data
             extensions: [.nc]
-            # TODO remove this line when we've moved the netcdfs to europe
-            limit: 1
     chunk_storage:
       uri: blob://ai4edataeuwest/pctasks-scratch-etl-data/noaa-cdr/sea-ice-concentration
   - id: noaa-cdr-sea-surface-temperature-optimum-interpolation
@@ -56,8 +54,6 @@ collections:
           options:
             name_starts_with: data/v2.1/avhrr
             extensions: [.nc]
-            # TODO remove this line when we've moved the netcdfs to europe
-            limit: 1
     chunk_storage:
       uri: blob://ai4edataeuwest/pctasks-scratch-etl-data/noaa-cdr/sea-surface-temperature-optimum-interpolation
   - id: noaa-cdr-sea-surface-temperature-whoi
@@ -69,8 +65,6 @@ collections:
           options:
             name_starts_with: data
             extensions: [.nc]
-            # TODO remove this line when we've moved the netcdfs to europe
-            limit: 1
     chunk_storage:
       uri: blob://ai4edataeuwest/pctasks-scratch-etl-data/noaa-cdr/sea-surface-temperature-whoi
   - id: noaa-cdr-sea-surface-temperature-whoi-netcdf
@@ -82,7 +76,5 @@ collections:
           options:
             name_starts_with: data
             extensions: [.nc]
-            # TODO remove this line when we've moved the netcdfs to europe
-            limit: 1
     chunk_storage:
       uri: blob://ai4edataeuwest/pctasks-scratch-etl-data/noaa-cdr/sea-surface-temperature-whoi-netcdf

@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import Any, Dict
 
 import orjson
-from pystac import Collection, Provider, ProviderRole
+from pystac import Asset, Collection, MediaType, Provider, ProviderRole
 from stactools.noaa_cdr.constants import NETCDF_ASSET_KEY
 
 RAW_EXAMPLES_URL = (
@@ -49,12 +49,38 @@ class CollectionFileContent:
         collection.extra_fields["msft:group_id"] = "noaa-cdr"
         collection.extra_fields["msft:region"] = "eastus"
 
+        collection.assets = {}
+        collection.add_asset(
+            "thumbnail",
+            Asset(
+                f"https://ai4edatasetspublicassets.blob.core.windows.net/assets/pc_thumbnails/noaa-cdr-{name}-thumb.png",
+                title=f"{collection.title} thumbnail",
+                media_type=MediaType.PNG,
+                roles=["thumbnail"],
+            ),
+        )
+        collection.add_asset(
+            "geoparquet-items",
+            Asset(
+                f"abfs://items/noaa-cdr-{name}.parquet",
+                title="GeoParquet STAC items",
+                description=(
+                    "Snapshot of the collection's STAC items "
+                    "exported to GeoParquet format"
+                ),
+                media_type="application/x-parquet",
+                roles=["stac-items"],
+                extra_fields={
+                    "msft:partition_info": {"is_partitioned": False},
+                    "table:storage_options": {"account_name": "pcstacitems"},
+                },
+            ),
+        )
+
         collection_as_dict = collection.to_dict(include_self_link=False)
         collection_as_dict["links"] = [
             l for l in collection_as_dict["links"] if l["rel"] not in {"root", "parent"}
         ]  # Required until https://github.com/stac-utils/pystac/pull/896
-        if "assets" in collection_as_dict:
-            del collection_as_dict["assets"]
         return CollectionFileContent(
             template=collection_as_dict, description=description
         )
@@ -87,6 +113,10 @@ def create_netcdf_collection(name: str) -> None:
         }
     }
     collection["title"] += " NetCDFs"
+    del collection["assets"]["thumbnail"]
+    collection["assets"]["geoparquet-items"][
+        "href"
+    ] = f"abfs://items/noaa-cdr-{name}-netcdf.parquet"
     collection_file_content.write(f"{name}-netcdf")
 
 
