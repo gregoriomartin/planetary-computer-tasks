@@ -47,6 +47,7 @@ class CollectionFileContent:
         collection.extra_fields["msft:storage_account"] = "noaacdr"
         collection.extra_fields["msft:container"] = name
         collection.extra_fields["msft:group_id"] = "noaa-cdr"
+        collection.extra_fields["msft:region"] = "eastus"
 
         collection_as_dict = collection.to_dict(include_self_link=False)
         collection_as_dict["links"] = [
