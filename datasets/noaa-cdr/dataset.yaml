@@ -21,7 +21,7 @@ collections:
             extensions: [.nc]
             limit: 1
     chunk_storage:
-      uri: blob://ai4edataeuwest/pctasks-scratch-etl-data/noaa-cdr/ocean-heat-content
+      uri: blob://noaacdr/etl-data/ocean-heat-content
   - id: noaa-cdr-ocean-heat-content-netcdf
     template: ${{ local.path(./collections/ocean-heat-content-netcdf) }}
     class: noaa_cdr:OceanHeatContentNetcdfCollection
@@ -33,7 +33,7 @@ collections:
             extensions: [.nc]
             limit: 1
     chunk_storage:
-      uri: blob://ai4edataeuwest/pctasks-scratch-etl-data/noaa-cdr/ocean-heat-content-netcdf
+      uri: blob://noaacdr/etl-data/ocean-heat-content-netcdf
   - id: noaa-cdr-sea-ice-concentration
     template: ${{ local.path(./collections/sea-ice-concentration) }}
     class: noaa_cdr:SeaIceConcentrationCollection
@@ -44,7 +44,7 @@ collections:
             name_starts_with: data
             extensions: [.nc]
     chunk_storage:
-      uri: blob://ai4edataeuwest/pctasks-scratch-etl-data/noaa-cdr/sea-ice-concentration
+      uri: blob://noaacdr/etl-data/sea-ice-concentration
   - id: noaa-cdr-sea-surface-temperature-optimum-interpolation
     template: ${{ local.path(./collections/sea-surface-temperature-optimum-interpolation) }}
     class: noaa_cdr:SeaSurfaceTemperatureOptimumInterpolationCollection
@@ -55,7 +55,7 @@ collections:
             name_starts_with: data/v2.1/avhrr
             extensions: [.nc]
     chunk_storage:
-      uri: blob://ai4edataeuwest/pctasks-scratch-etl-data/noaa-cdr/sea-surface-temperature-optimum-interpolation
+      uri: blob://noaacdr/etl-data/sea-surface-temperature-optimum-interpolation
   - id: noaa-cdr-sea-surface-temperature-whoi
     template: ${{ local.path(./collections/sea-surface-temperature-whoi) }}
     class: noaa_cdr:SeaSurfaceTemperatureWhoiCollection
@@ -66,7 +66,7 @@ collections:
             name_starts_with: data
             extensions: [.nc]
     chunk_storage:
-      uri: blob://ai4edataeuwest/pctasks-scratch-etl-data/noaa-cdr/sea-surface-temperature-whoi
+      uri: blob://noaacdr/etl-data/sea-surface-temperature-whoi
   - id: noaa-cdr-sea-surface-temperature-whoi-netcdf
     template: ${{ local.path(./collections/sea-surface-temperature-whoi-netcdf) }}
     class: noaa_cdr:SeaSurfaceTemperatureWhoiNetcdfCollection
@@ -77,4 +77,4 @@ collections:
             name_starts_with: data
             extensions: [.nc]
     chunk_storage:
-      uri: blob://ai4edataeuwest/pctasks-scratch-etl-data/noaa-cdr/sea-surface-temperature-whoi-netcdf
+      uri: blob://noaacdr/etl-data/sea-surface-temperature-whoi-netcdf

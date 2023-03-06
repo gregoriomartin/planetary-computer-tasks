@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 
 def cog_uri(name: str) -> str:
-    return f"blob://ai4edataeuwest/pctasks-scratch-etl-data/noaa-cdr/{name}/cogs/"
+    return f"blob://noaacdr/cogs/{name}"
 
 
 class OceanHeatContentCollection(Collection):
@@ -142,7 +142,7 @@ class SeaSurfaceTemperatureOptimumInterpolationCollection(Collection):
             file_name = os.path.basename(asset_path)
             outfile = os.path.join(temporary_directory, file_name)
             asset_storage.download_file(asset_path, outfile)
-            item = stactools.noaa_cdr.sea_surface_temperature_optimum_interpolation.stac.create_item(
+            item = stactools.noaa_cdr.sea_surface_temperature_optimum_interpolation.stac.create_item(  # noqa
                 outfile
             )
             item.assets[
