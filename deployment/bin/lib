@@ -150,3 +150,8 @@ function get_cidr_range() {
     IFS='.' read -r -a ip_parts <<< "$runnerIpAddress"
     echo "${ip_parts[0]}.${ip_parts[1]}.0.0/16"
 }
+
+function get_kv_func_token() {
+    token=$(az account get-access-token --resource=api://c172b371-e1f5-4afe-80aa-8b297622ce25)
+    echo $token | jq -r ".accessToken"
+}

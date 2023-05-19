@@ -26,18 +26,14 @@ while [[ "$#" -gt 0 ]]; do case $1 in
 
 if [ "${BASH_SOURCE[0]}" = "${0}" ]; then
 
-    cidr=$(get_cidr_range)
+    kv_token=$(get_kv_func_token)
 
-    az keyvault network-rule remove \
-        -g ${DEPLOY_SECRETS_KV_RG_NAME} \
-        -n ${DEPLOY_SECRETS_KV} \
-        --ip-address $cidr \
-        --subscription ${ARM_SUBSCRIPTION_ID}
+    uri="https://func-pc-keyvault-auth.azurewebsites.net/api/RemoveIpException?guid=${guid_deploy_secrets}&pipeline=github-pc-tasks&resourceGroup=${DEPLOY_SECRETS_KV_RG_NAME}&keyVault=${DEPLOY_SECRETS_KV}"
 
-    az keyvault network-rule remove \
-        -g ${PCTASKS_TASK_KV_RESOURCE_GROUP_NAME} \
-        -n ${PCTASKS_TASK_KV} \
-        --ip-address $cidr \
-        --subscription ${ARM_SUBSCRIPTION_ID}
+    echo $(curl --header "Authentication: Bearer $kv_token" -s $uri)
+
+    uri="https://func-pc-keyvault-auth.azurewebsites.net/api/RemoveIpException?guid=${guid_pctasks_kv}&pipeline=github-pc-tasks&resourceGroup=${PCTASKS_TASK_KV_RESOURCE_GROUP_NAME}&keyVault=${PCTASKS_TASK_KV}"
+
+    echo $(curl --header "Authentication: Bearer $kv_token" -s $uri)
 
 fi
